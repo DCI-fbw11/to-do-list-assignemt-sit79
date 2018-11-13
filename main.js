@@ -19,25 +19,33 @@ $(document).ready(function() {
         let temp = Math.round(data.main.temp).toString();
         let highTemp = data.main.temp_max.toString();
         let lowTemp = data.main.temp_min.toString();
+        let icon = data.weather[0].icon;
+        let iconURL = `http://openweathermap.org/img/w/${icon}.png`;
+        //let date = new Date();
+        //let today = date.getDate();
 
-        $("#result").html(
-          `Today in ${name}, it's ${temp}&#8451;, the weather is ${weatherMain} /w ${weatherDesc}.\nThe high is ${highTemp}&#8451; and the low is ${lowTemp}&#8451;.`
-        );
+        // $("#result").html(
+        //   `<img src="${iconURL}">` +
+        //     `Today in ${name}, it's ${temp}&#8451;, the weather is ${weatherMain}
+        ///w ${weatherDesc}.\nThe high is ${highTemp}&#8451;
+        //and the low is ${lowTemp}&#8451;.`
+        // );
+        $("#result").html(name);
+        $("#weather").html(weatherMain);
+        $("#weatherIcon").attr("src", `${iconURL}`);
+        $("#weatherIcon").attr("width", 100);
+        $("#weatherIcon").attr("height", 100);
+        $("#bigTemp").html(`${temp}&#8451;`);
+        //attr('src', newSrc);
       })
       .fail(function(xhr, status, error) {
         $("#result").html(
           `City "${city}" not found, please enter a valid city.`
         );
-        console.log(
-          "Result: " +
-            status +
-            " " +
-            error +
-            " " +
-            xhr.status +
-            " " +
-            xhr.statusText
-        );
+        $("#weather").html("");
+        $("#weatherIcon").attr("width", 0);
+        $("#weatherIcon").attr("height", 0);
+        $("#bigTemp").html("");
       });
 
     event.preventDefault();
