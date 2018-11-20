@@ -14,7 +14,7 @@ $(document).ready(function() {
       .done(function(data) {
         console.log(data);
         let name = data["name"];
-        let weatherMain = data.weather[0].main.toLowerCase();
+        let weatherMain = data.weather[0].main;
         let weatherDesc = data.weather[0].description;
         let temp = Math.round(data.main.temp).toString();
         let highTemp = data.main.temp_max.toString();
@@ -23,7 +23,6 @@ $(document).ready(function() {
         let iconURL = `http://openweathermap.org/img/w/${icon}.png`;
         //let date = new Date();
         //let today = date.getDate();
-
         // $("#result").html(
         //   `<img src="${iconURL}">` +
         //     `Today in ${name}, it's ${temp}&#8451;, the weather is ${weatherMain}
@@ -36,6 +35,9 @@ $(document).ready(function() {
         $("#weatherIcon").attr("width", 100);
         $("#weatherIcon").attr("height", 100);
         $("#bigTemp").html(`${temp}&#8451;`);
+        $("#form").each(function() {
+          this.reset();
+        });
         //attr('src', newSrc);
       })
       .fail(function(xhr, status, error) {
@@ -46,6 +48,9 @@ $(document).ready(function() {
         $("#weatherIcon").attr("width", 0);
         $("#weatherIcon").attr("height", 0);
         $("#bigTemp").html("");
+        $("#form").each(function() {
+          this.reset();
+        });
       });
 
     event.preventDefault();
