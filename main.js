@@ -12,13 +12,13 @@ $(document).ready(function() {
     // console.log(url);
     $.getJSON({ url })
       .done(function(data) {
-        console.log(data);
+        //console.log(data);
         let name = data["name"];
         let weatherMain = data.weather[0].main;
-        let weatherDesc = data.weather[0].description;
+        //let weatherDesc = data.weather[0].description;
         let temp = Math.round(data.main.temp).toString();
-        let highTemp = data.main.temp_max.toString();
-        let lowTemp = data.main.temp_min.toString();
+        //let highTemp = data.main.temp_max.toString();
+        //let lowTemp = data.main.temp_min.toString();
         let icon = data.weather[0].icon;
         let iconURL = `http://openweathermap.org/img/w/${icon}.png`;
         //let date = new Date();
@@ -57,7 +57,8 @@ $(document).ready(function() {
   });
 });
 /*
-{"coord":{"lon":32.85,"lat":39.92},
+{
+"coord":{"lon":32.85,"lat":39.92},
 "weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],
 "base":"stations",
 "main":{"temp":285.15,"pressure":1024,"humidity":50,"temp_min":284.15,"temp_max":286.15},
@@ -70,4 +71,14 @@ $(document).ready(function() {
 "sunset":1542119633},
 "id":323786,
 "name":"Ankara",
-"cod":200}*/
+"cod":200
+}
+*/
+var $loading = $("#loading").hide();
+$(document)
+  .ajaxStart(function() {
+    $loading.show();
+  })
+  .ajaxStop(function() {
+    $loading.hide();
+  });

@@ -37,7 +37,8 @@ section {
   padding: 0;
   margin: 0;
 }
-#weatherIcon {
+#weather {
+  font-size: 2em;
 }
 #textDiv {
   display: flex;
